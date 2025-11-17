@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lotto_8/screens/result_screen.dart';
 
 class HomeScrean extends StatelessWidget {
   const HomeScrean({super.key});
@@ -25,7 +26,12 @@ class HomeScrean extends StatelessWidget {
             ),
             SizedBox(height: 20),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ResultScreen()),
+                );
+              },
               child: Text('구매하기'),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
