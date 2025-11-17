@@ -55,6 +55,15 @@ class ResultScreen extends StatelessWidget {
                 },
               ),
             ),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('구매화면으로'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50),
+              ),
+            ),
           ],
         ),
       ),
