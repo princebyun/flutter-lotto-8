@@ -31,6 +31,30 @@ class ResultScreen extends StatelessWidget {
             Divider(height: 40, thickness: 1),
             Text('내 구매 내역', style: TextStyle(fontSize: 24)),
             SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    subtitle: Row(
+                      children: [
+                        LottoBall(number: 1),
+                        SizedBox(width: 5),
+                        LottoBall(number: 2),
+                        SizedBox(width: 5),
+                        LottoBall(number: 3),
+                        SizedBox(width: 5),
+                        LottoBall(number: 4),
+                        SizedBox(width: 5),
+                        LottoBall(number: 5),
+                        SizedBox(width: 5),
+                        LottoBall(number: 6),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
