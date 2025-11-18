@@ -28,9 +28,7 @@ class ResultScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 for (int number in winnerNumbers) LottoBall(number: number),
-
                 Icon(Icons.add, size: 30),
-
                 LottoBall(number: bonusNumber),
               ],
             ),
@@ -40,13 +38,19 @@ class ResultScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: myLottoList.length,
-
                 itemBuilder: (context, index) {
                   List<int> lotto = myLottoList[index];
-
                   return ListTile(
                     title: Text('${index + 1}번째 장'),
-                    subtitle: Text(lotto.join(', ')),
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        for (int number in lotto) ...[
+                          LottoBall(number: number),
+                          const SizedBox(width: 4),
+                        ],
+                      ],
+                    ),
                   );
                 },
               ),
