@@ -43,6 +43,25 @@ class ResultScreen extends StatelessWidget {
               ],
             ),
             Divider(height: 40, thickness: 1),
+            Text('수익률', style: TextStyle(fontSize: 24)),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('총 구매금액: ${money}원'),
+                Text('총 당첨금: ${resultMoney}원'),
+                const SizedBox(height: 5),
+                Text(
+                  '수익률: ${resultRate.toStringAsFixed(1)}%',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            Divider(height: 40, thickness: 1),
             Text('내 구매 내역', style: TextStyle(fontSize: 24)),
             SizedBox(height: 10),
             Expanded(
