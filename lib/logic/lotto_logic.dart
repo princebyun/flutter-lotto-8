@@ -9,7 +9,6 @@ void main() {
   print(getWinner(winningLotto, bonusNumber, myLotto));
 }
 
-//로또 발금 메서드
 List<int> createLotto() {
   Set<int> tempList = HashSet<int>();
 
@@ -23,7 +22,6 @@ List<int> createLotto() {
   return lotto;
 }
 
-//당첨등수 판별 로직 구현
 String getWinner(List<int> winningLotto, int bonusNumber, List<int> myLotto) {
   int count = 0;
   int bonus = 0;
@@ -74,16 +72,16 @@ List<List<int>> buyLotto(int money) {
 int getPrizeAmount(String rank) {
   switch (rank) {
     case "1등":
-      return 2000000000; // 20억
+      return 2000000000;
     case "2등":
-      return 30000000; // 3000만
+      return 30000000;
     case "3등":
-      return 1500000; // 150만
+      return 1500000;
     case "4등":
-      return 50000; // 5만
+      return 50000;
     case "5등":
-      return 5000; // 5천
+      return 5000;
     default:
-      return 0; // 꽝
+      return 0;
   }
 }

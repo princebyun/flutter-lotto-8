@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lotto_8/screens/home_screen.dart';
-//import 'package:flutter_lotto_8/screens/result_screen.dart';
 
 void main() {
   runApp(const MyApp());
