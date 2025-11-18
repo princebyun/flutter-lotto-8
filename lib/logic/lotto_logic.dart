@@ -70,3 +70,20 @@ List<List<int>> buyLotto(int money) {
 
   return myLottoList;
 }
+
+int getPrizeAmount(String rank) {
+  switch (rank) {
+    case "1등":
+      return 2000000000; // 20억
+    case "2등":
+      return 30000000; // 3000만
+    case "3등":
+      return 1500000; // 150만
+    case "4등":
+      return 50000; // 5만
+    case "5등":
+      return 5000; // 5천
+    default:
+      return 0; // 꽝
+  }
+}

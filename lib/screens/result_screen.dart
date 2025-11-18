@@ -16,6 +16,15 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int money = myLottoList.length * 1000;
+    int resultMoney = 0;
+
+    for (var lotto in myLottoList) {
+      String rank = getWinner(winnerNumbers, bonusNumber, lotto);
+      resultMoney += getPrizeAmount(rank);
+    }
+    double resultRate = (resultMoney / money) * 100;
+
     return Scaffold(
       appBar: AppBar(title: const Text('구입 결과')),
       body: Padding(
