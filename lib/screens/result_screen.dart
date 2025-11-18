@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lotto_8/widgets/lotto_ball.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+  final List<List<int>> myLottoList;
+  final List<int> winnerNumbers;
+  final int bonusNumber;
+
+  const ResultScreen({
+    super.key,
+    required this.myLottoList,
+    required this.winnerNumbers,
+    required this.bonusNumber,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +27,11 @@ class ResultScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                LottoBall(number: 1),
-                LottoBall(number: 10),
-                LottoBall(number: 20),
-                LottoBall(number: 30),
-                LottoBall(number: 40),
-                LottoBall(number: 45),
+                for (int number in winnerNumbers) LottoBall(number: number),
+
                 Icon(Icons.add, size: 30),
-                LottoBall(number: 7),
+
+                LottoBall(number: bonusNumber),
               ],
             ),
             Divider(height: 40, thickness: 1),
@@ -33,24 +39,14 @@ class ResultScreen extends StatelessWidget {
             SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
-                itemCount: 5,
+                itemCount: myLottoList.length,
+
                 itemBuilder: (context, index) {
+                  List<int> lotto = myLottoList[index];
+
                   return ListTile(
-                    subtitle: Row(
-                      children: [
-                        LottoBall(number: 1),
-                        SizedBox(width: 5),
-                        LottoBall(number: 2),
-                        SizedBox(width: 5),
-                        LottoBall(number: 3),
-                        SizedBox(width: 5),
-                        LottoBall(number: 4),
-                        SizedBox(width: 5),
-                        LottoBall(number: 5),
-                        SizedBox(width: 5),
-                        LottoBall(number: 6),
-                      ],
-                    ),
+                    title: Text('${index + 1}번째 장'),
+                    subtitle: Text(lotto.join(', ')),
                   );
                 },
               ),
