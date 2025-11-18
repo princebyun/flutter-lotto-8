@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lotto_8/logic/lotto_logic.dart';
 import 'package:flutter_lotto_8/widgets/lotto_ball.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -40,6 +41,9 @@ class ResultScreen extends StatelessWidget {
                 itemCount: myLottoList.length,
                 itemBuilder: (context, index) {
                   List<int> lotto = myLottoList[index];
+
+                  String rank = getWinner(winnerNumbers, bonusNumber, lotto);
+
                   return ListTile(
                     title: Text('${index + 1}번째 장'),
                     subtitle: Row(
@@ -49,6 +53,8 @@ class ResultScreen extends StatelessWidget {
                           LottoBall(number: number),
                           const SizedBox(width: 4),
                         ],
+                        const SizedBox(width: 4),
+                        Text('$rank입니다.'),
                       ],
                     ),
                   );
