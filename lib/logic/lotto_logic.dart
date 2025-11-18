@@ -14,7 +14,7 @@ List<int> createLotto() {
   Set<int> tempList = HashSet<int>();
 
   while (tempList.length < 6) {
-    tempList.add(new Random().nextInt(45) + 1);
+    tempList.add(Random().nextInt(45) + 1);
   }
 
   List<int> lotto = tempList.toList();
@@ -25,7 +25,6 @@ List<int> createLotto() {
 
 //당첨등수 판별 로직 구현
 String getWinner(List<int> winningLotto, int bonusNumber, List<int> myLotto) {
-  HashMap<String, int> result = new HashMap<String, int>();
   int count = 0;
   int bonus = 0;
   for (var lotto in myLotto) {
@@ -37,8 +36,6 @@ String getWinner(List<int> winningLotto, int bonusNumber, List<int> myLotto) {
   if (myLotto.contains(bonusNumber)) {
     bonus++;
   }
-  result['count'] = count;
-  result['bonus'] = bonus;
 
   return getWinnerGrade(count, bonus);
 }
@@ -60,4 +57,16 @@ String getWinnerGrade(int count, int bonus) {
     return "5등";
   }
   return "꽝";
+}
+
+List<List<int>> buyLotto(int money) {
+  List<List<int>> myLottoList = [];
+
+  int round = (money / 1000).toInt();
+
+  for (var i = 0; i < round; i++) {
+    myLottoList.add(createLotto());
+  }
+
+  return myLottoList;
 }
