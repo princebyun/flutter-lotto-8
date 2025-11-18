@@ -1,8 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_lotto_8/logic/lotto_logic.dart';
 import 'package:flutter_lotto_8/screens/result_screen.dart';
 
-class HomeScrean extends StatelessWidget {
+class HomeScrean extends StatefulWidget {
   const HomeScrean({super.key});
+
+  @override
+  State<HomeScrean> createState() => _HomeScreanState();
+}
+
+class _HomeScreanState extends State<HomeScrean> {
+  final TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +29,7 @@ class HomeScrean extends StatelessWidget {
             ),
             SizedBox(height: 10),
             TextField(
+              controller: textController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: '1000원 단위 금액만 숫자로 입력하세요.',
@@ -27,9 +38,28 @@ class HomeScrean extends StatelessWidget {
             SizedBox(height: 20),
             OutlinedButton(
               onPressed: () {
+                String input = textController.text;
+                if (input.isEmpty) return;
+
+                int money = int.parse(input);
+
+                List<List<int>> myLottoList = buyLotto(money);
+
+                List<int> winnerNumbers = createLotto();
+                int bonusNumber;
+                do {
+                  bonusNumber = Random().nextInt(45) + 1;
+                } while (winnerNumbers.contains(bonusNumber));
+
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ResultScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => ResultScreen(
+                      myLottoList: myLottoList,
+                      winnerNumbers: winnerNumbers,
+                      bonusNumber: bonusNumber,
+                    ),
+                  ),
                 );
               },
               child: Text('구매하기'),
