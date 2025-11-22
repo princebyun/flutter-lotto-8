@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_lotto_8/logic/WinningInfo.dart';
 import 'package:flutter_lotto_8/logic/lotto_logic.dart';
 import 'package:flutter_lotto_8/widgets/lotto_ball.dart';
 
@@ -18,12 +21,14 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     int money = myLottoList.length * 1000;
     int resultMoney = 0;
+    HashMap<String, int> rankCount = HashMap<String, int>();
 
     for (var lotto in myLottoList) {
-      String rank = getWinner(winnerNumbers, bonusNumber, lotto);
-      resultMoney += getPrizeAmount(rank);
+      WinningInfo rank = getWinner(winnerNumbers, bonusNumber, lotto);
+      rankCount.update(rank.rank, (value) => value + 1, ifAbsent: () => 0);
+      resultMoney += rank.winningMoney;
     }
-    double resultRate = (resultMoney / money) * 100;
+    double resultRate = money == 0 ? 0 : (resultMoney / money) * 100;
 
     return Scaffold(
       appBar: AppBar(title: const Text('구입 결과')),
@@ -61,6 +66,22 @@ class ResultScreen extends StatelessWidget {
                 ),
               ],
             ),
+            //---------------------------------------------------------
+            Divider(height: 40, thickness: 1),
+            Text('당첨정보', style: TextStyle(fontSize: 24)),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text('1등 : ${rankCount['1등'] ?? 0}번'),
+                Text('2등 : ${rankCount['2등'] ?? 0}번'),
+                Text('3등 : ${rankCount['3등'] ?? 0}번'),
+                Text('4등 : ${rankCount['4등'] ?? 0}번'),
+                Text('5등 : ${rankCount['5등'] ?? 0}번'),
+                Text('꽝 : ${rankCount['꽝'] ?? 0}번'),
+              ],
+            ),
+            //---------------------------------------------------------
             Divider(height: 40, thickness: 1),
             Text('내 구매 내역', style: TextStyle(fontSize: 24)),
             SizedBox(height: 10),
@@ -70,7 +91,11 @@ class ResultScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   List<int> lotto = myLottoList[index];
 
-                  String rank = getWinner(winnerNumbers, bonusNumber, lotto);
+                  WinningInfo rank = getWinner(
+                    winnerNumbers,
+                    bonusNumber,
+                    lotto,
+                  );
 
                   return ListTile(
                     title: Text('${index + 1}번째 장'),
@@ -82,7 +107,7 @@ class ResultScreen extends StatelessWidget {
                           const SizedBox(width: 4),
                         ],
                         const SizedBox(width: 4),
-                        Text('$rank입니다.'),
+                        Text('${rank.rank} 입니다.'),
                       ],
                     ),
                   );

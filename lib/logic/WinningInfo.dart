@@ -1,16 +1,22 @@
 enum WinningInfo {
-  RANK1(6, 0, 2000000000),
-  RANK2(5, 1, 30000000),
-  RANK3(5, 0, 1500000),
-  RANK4(4, 0, 50000),
-  RANK5(3, 0, 5000),
-  FALSE(0, 0, 0);
+  RANK1(6, 0, 2000000000, '1등'),
+  RANK2(5, 1, 30000000, '2등'),
+  RANK3(5, 0, 1500000, '3등'),
+  RANK4(4, 0, 50000, '4등'),
+  RANK5(3, 0, 5000, '5등'),
+  FALSE(0, 0, 0, '꽝');
 
   final int winningNumber;
   final int bonusNumber;
   final int winningMoney;
+  final String rank;
 
-  const WinningInfo(this.winningNumber, this.bonusNumber, this.winningMoney);
+  const WinningInfo(
+    this.winningNumber,
+    this.bonusNumber,
+    this.winningMoney,
+    this.rank,
+  );
 
   static WinningInfo getRank(int count, int bonus) {
     if (count == 6) return WinningInfo.RANK1;

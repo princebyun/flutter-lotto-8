@@ -1,6 +1,8 @@
 import 'dart:collection';
 import 'dart:math';
 
+import 'WinningInfo.dart';
+
 void main() {
   print(createLotto());
   List<int> winningLotto = [1, 2, 3, 4, 5, 6];
@@ -22,7 +24,11 @@ List<int> createLotto() {
   return lotto;
 }
 
-String getWinner(List<int> winningLotto, int bonusNumber, List<int> myLotto) {
+WinningInfo getWinner(
+  List<int> winningLotto,
+  int bonusNumber,
+  List<int> myLotto,
+) {
   int count = 0;
   int bonus = 0;
   for (var lotto in myLotto) {
@@ -35,26 +41,7 @@ String getWinner(List<int> winningLotto, int bonusNumber, List<int> myLotto) {
     bonus++;
   }
 
-  return getWinnerGrade(count, bonus);
-}
-
-String getWinnerGrade(int count, int bonus) {
-  if (count == 6) {
-    return "1등";
-  }
-  if (count == 5 && bonus == 1) {
-    return "2등";
-  }
-  if (count == 5 && bonus == 0) {
-    return "3등";
-  }
-  if (count == 4) {
-    return "4등";
-  }
-  if (count == 3) {
-    return "5등";
-  }
-  return "꽝";
+  return WinningInfo.getRank(count, bonus);
 }
 
 List<List<int>> buyLotto(int money) {
@@ -67,21 +54,4 @@ List<List<int>> buyLotto(int money) {
   }
 
   return myLottoList;
-}
-
-int getPrizeAmount(String rank) {
-  switch (rank) {
-    case "1등":
-      return 2000000000;
-    case "2등":
-      return 30000000;
-    case "3등":
-      return 1500000;
-    case "4등":
-      return 50000;
-    case "5등":
-      return 5000;
-    default:
-      return 0;
-  }
 }
